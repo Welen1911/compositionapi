@@ -1,6 +1,10 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  {{ framework }}
+  <img @click="melhorque()" alt="Vue logo" src="./assets/logo.png">
+  {{ conjuncao }}
+<HelloWorld v-if="showTecnologia" :msg="tecnologia"/>
+<HelloWorld v-else msg="Ain VueJs não presta, ainnnnn"/>
+<input type="text" v-model="tecnologia">
 </template>
 
 <script>
@@ -10,6 +14,26 @@ export default {
   name: 'App',
   components: {
     HelloWorld
+  },
+  data() {
+    return {
+      conjuncao: "É melhor que ",
+      tecnologia: "",
+      showTecnologia: false
+    }
+  },
+  methods: {
+    melhorque() {
+      this.showTecnologia = !this.showTecnologia;
+    }
+  },
+  setup() {
+    
+    const framework = "VueJs";
+
+    return {
+      framework
+    };
   }
 }
 </script>
