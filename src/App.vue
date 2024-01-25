@@ -2,12 +2,15 @@
   {{ framework }}
   <img @click="melhorque()" alt="Vue logo" src="./assets/logo.png">
   {{ conjuncao }}
-<HelloWorld v-if="showTecnologia" :msg="tecnologia"/>
-<HelloWorld v-else msg="Ain VueJs não presta, ainnnnn"/>
-<input type="text" v-model="tecnologia">
+<HelloWorld  :msg="showTecnologia ? tecnologia : 'Ain VueJs não presta, ainnnnn'"/>
+
+<input type="text" v-model="user.firstName">
+<h1>{{ user.firstName }}</h1>
 </template>
 
 <script>
+import { ref } from 'vue';
+
 import HelloWorld from './components/HelloWorld.vue'
 
 export default {
@@ -25,13 +28,19 @@ export default {
   methods: {
     melhorque() {
       this.showTecnologia = !this.showTecnologia;
+      this.user.firstName = "Maverick"
     }
   },
   setup() {
     
+    let user = ref({
+      firstName: "Welen",
+      lastName: "Almeida"
+    });
     const framework = "VueJs";
 
     return {
+      user,
       framework
     };
   }
