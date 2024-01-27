@@ -6,10 +6,11 @@
 
 <input type="text" v-model="user.firstName">
 <h1>{{ user.firstName }}</h1>
+<p>Nome completo: {{ fullName }}</p>
 </template>
 
 <script>
-import { ref } from 'vue';
+import { ref, computed, watch } from 'vue';
 
 import HelloWorld from './components/HelloWorld.vue'
 
@@ -28,7 +29,7 @@ export default {
   methods: {
     melhorque() {
       this.showTecnologia = !this.showTecnologia;
-      this.user.firstName = "Maverick"
+      this.user.lastName = "Maverick"
     }
   },
   setup() {
@@ -37,11 +38,23 @@ export default {
       firstName: "Welen",
       lastName: "Almeida"
     });
+
+    const fullName = computed(() => {
+        return `${user.value.firstName} ${user.value.lastName}`;
+    });
+
+    watch(() => user.value.lastName, () => {
+      window.location.href = 'https://google.com';
+    }, {
+      deep: true
+    });
+
     const framework = "VueJs";
 
     return {
       user,
-      framework
+      framework,
+      fullName
     };
   }
 }
